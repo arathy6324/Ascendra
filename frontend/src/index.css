@@ -1,0 +1,367 @@
+@import "tailwindcss";
+
+/* ============================================================
+   ASCENDRA DESIGN SYSTEM — CSS Custom Properties
+   Light theme default · Dark theme via html.dark
+   ============================================================ */
+
+@layer base {
+  :root {
+    /* Canvas & Surfaces */
+    --bg-canvas: #F7F8FA;
+    --bg-surface: #FFFFFF;
+    --bg-subtle: #F0F2F6;
+    --bg-hover: #E8EAEF;
+
+    /* Borders */
+    --border: #E4E7EC;
+    --border-strong: #CBD0D9;
+
+    /* Typography */
+    --text-primary: #111827;
+    --text-secondary: #6B7280;
+    --text-muted: #9CA3AF;
+    --text-inverse: #FFFFFF;
+
+    /* Accent — Soft Indigo */
+    --accent: #5B6CF8;
+    --accent-hover: #4A59E8;
+    --accent-subtle: #EEF0FE;
+    --accent-muted: #C7CCFD;
+
+    /* Semantic colors */
+    --color-success: #10B981;
+    --color-success-subtle: #ECFDF5;
+    --color-warning: #F59E0B;
+    --color-warning-subtle: #FFFBEB;
+    --color-danger: #EF4444;
+    --color-danger-subtle: #FEF2F2;
+    --color-info: #06B6D4;
+    --color-info-subtle: #ECFEFF;
+    --color-purple: #8B5CF6;
+    --color-purple-subtle: #F5F3FF;
+
+    /* Sidebar (always dark regardless of mode) */
+    --sidebar-bg: #1E2235;
+    --sidebar-text: #CBD5E1;
+    --sidebar-muted: #64748B;
+    --sidebar-hover: rgba(255,255,255,0.07);
+    --sidebar-border: rgba(255,255,255,0.08);
+
+    /* Stat cards gradient bar colors */
+    --brand-indigo: #5B6CF8;
+    --brand-blue: #3B82F6;
+    --brand-teal: #0D9488;
+    --brand-emerald: #10B981;
+    --brand-amber: #F59E0B;
+    --brand-coral: #EF4444;
+    --brand-violet: #8B5CF6;
+    --brand-rose: #F43F5E;
+    --brand-cyan: #06B6D4;
+  }
+
+  /* ── Dark Mode Overrides ── */
+  html.dark {
+    --bg-canvas: #0F1117;
+    --bg-surface: #1A1D27;
+    --bg-subtle: #22263A;
+    --bg-hover: #2A2F45;
+
+    --border: #2E3348;
+    --border-strong: #3D4461;
+
+    --text-primary: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+
+    --accent: #818CF8;
+    --accent-hover: #6E7AEB;
+    --accent-subtle: #1E2240;
+    --accent-muted: #3D4580;
+
+    --color-success: #34D399;
+    --color-success-subtle: #0A2A1E;
+    --color-warning: #FCD34D;
+    --color-warning-subtle: #2A1F00;
+    --color-danger: #F87171;
+    --color-danger-subtle: #2A0F0F;
+    --color-info: #22D3EE;
+    --color-info-subtle: #042A33;
+    --color-purple: #A78BFA;
+    --color-purple-subtle: #1C1536;
+  }
+
+  /* Apply theme transition globally */
+  *,
+  *::before,
+  *::after {
+    transition-property: background-color, border-color, color;
+    transition-duration: 150ms;
+    transition-timing-function: ease;
+  }
+
+  /* But don't transition transforms/opacity (breaks animations) */
+  [class*="animate-"],
+  [class*="transition-transform"] {
+    transition-property: transform, opacity;
+  }
+
+  html, body {
+    color-scheme: light;
+  }
+  html.dark, html.dark body {
+    color-scheme: dark;
+  }
+
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    margin: 0;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Sora', 'DM Sans', sans-serif;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+    color: var(--text-primary);
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: white;
+  }
+}
+
+/* ============================================================
+   UTILITY CLASSES — Theme-aware
+   ============================================================ */
+
+.bg-canvas { background-color: var(--bg-canvas); }
+.bg-surface { background-color: var(--bg-surface); }
+.bg-subtle { background-color: var(--bg-subtle); }
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+.border-theme { border-color: var(--border); }
+
+/* ============================================================
+   CARD SYSTEM
+   ============================================================ */
+
+.card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px -4px rgba(0,0,0,0.05);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06), 0 10px 24px -6px rgba(91,108,248,0.1);
+}
+
+html.dark .card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 4px 16px -4px rgba(0,0,0,0.4);
+}
+
+html.dark .card:hover {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4), 0 10px 24px -6px rgba(129,140,248,0.15);
+}
+
+/* ============================================================
+   MESH GRADIENT BACKGROUNDS
+   ============================================================ */
+
+.bg-mesh-hero {
+  background-color: var(--bg-canvas);
+  background-image:
+    radial-gradient(at 10% 15%, rgba(91, 108, 248, 0.18) 0px, transparent 50%),
+    radial-gradient(at 88% 12%, rgba(6, 182, 212, 0.15) 0px, transparent 48%),
+    radial-gradient(at 78% 82%, rgba(245, 158, 11, 0.12) 0px, transparent 48%),
+    radial-gradient(at 20% 85%, rgba(239, 68, 68, 0.1) 0px, transparent 45%),
+    radial-gradient(at 50% 45%, rgba(139, 92, 246, 0.08) 0px, transparent 55%);
+}
+
+.bg-dot-pattern {
+  background-image: radial-gradient(rgba(91, 108, 248, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ============================================================
+   GLASSMORPHISM
+   ============================================================ */
+
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+html.dark .glass {
+  background: rgba(26, 29, 39, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes floatDelayed {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(7px); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(91, 108, 248, 0.3); }
+  50% { box-shadow: 0 0 0 10px rgba(91, 108, 248, 0); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes scaleIn {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.animate-float-slow { animation: floatSlow 6s ease-in-out infinite; }
+.animate-float-delayed { animation: floatDelayed 7s ease-in-out infinite; }
+.animate-fade-in-up { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-fade-in { animation: fadeIn 0.3s ease both; }
+.animate-scale-in { animation: scaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-delay-100 { animation-delay: 80ms; }
+.animate-delay-200 { animation-delay: 160ms; }
+.animate-delay-300 { animation-delay: 240ms; }
+.animate-delay-400 { animation-delay: 320ms; }
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradientShift 7s ease infinite;
+}
+.animate-pulse-glow { animation: pulseGlow 2.6s ease-in-out infinite; }
+
+/* ============================================================
+   SKELETON LOADING
+   ============================================================ */
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-subtle);
+  border-radius: 0.5rem;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+html.dark .skeleton::after {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+}
+
+/* ============================================================
+   FORM ELEMENTS — Theme aware
+   ============================================================ */
+
+.form-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--bg-subtle);
+  border: 1.5px solid var(--border);
+  border-radius: 0.625rem;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(91, 108, 248, 0.15);
+  background-color: var(--bg-surface);
+}
+
+html.dark .form-input:focus {
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.2);
+}
+
+/* ============================================================
+   SCROLLBARS
+   ============================================================ */
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ============================================================
+   DARK MODE TOGGLE BUTTON
+   ============================================================ */
+
+.theme-toggle {
+  position: relative;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.625rem;
+  border: 1.5px solid var(--border);
+  background-color: var(--bg-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--accent-subtle);
+  border-color: var(--accent-muted);
+  color: var(--accent);
+}
